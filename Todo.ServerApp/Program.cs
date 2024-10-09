@@ -4,6 +4,8 @@ using Microsoft.EntityFrameworkCore;
 using Todo.ServerApp.Components;
 using Todo.ServerApp.Components.Account;
 using Todo.ServerApp.Data;
+using Todo.ServerApp.Data.Interfaces;
+using Todo.ServerApp.Data.Migrations.Services;
 
 namespace Todo.ServerApp
 {
@@ -40,7 +42,7 @@ namespace Todo.ServerApp
                 .AddDefaultTokenProviders();
 
             builder.Services.AddSingleton<IEmailSender<ApplicationUser>, IdentityNoOpEmailSender>();
-
+            builder.Services.AddScoped<IDataServices, MemoryDataService>();
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
